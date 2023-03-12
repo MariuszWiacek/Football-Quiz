@@ -121,6 +121,7 @@ function answers() {
             
             else {
                 incorrect();
+                minusTime();
                 
             }
             if (questionsCounter == 5) {
@@ -161,6 +162,10 @@ function incorrect() {
     setTimeout(function () {
         feedback.classList.add('hide');
     }, 1200);
+};
+
+function minusTime() {
+    secondsLeft = timer.textContent = secondsLeft - 10;
 };
 
 
