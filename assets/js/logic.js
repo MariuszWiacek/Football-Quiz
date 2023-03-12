@@ -25,16 +25,16 @@ function startTimer() {
             endGame();
         }
     }, 1000)
-        
+
 };
 
-function gameInit () {
-displayQuestions();
-displayAnswers();
+function gameInit() {
+    displayQuestions();
+    displayAnswers();
 
 }
 
-function displayQuestions () {
+function displayQuestions() {
     startScreen.style.display = "none"; // unhide start screen
     document.body.appendChild(questionsContainer);
     questionsContainer.classList.remove('hide');
@@ -44,35 +44,102 @@ function displayQuestions () {
     questionsCounter++;
 };
 
-function displayAnswers () {
+function displayAnswers() {
     startScreen.style.display = "none";
     document.body.appendChild(answersContainer);
 
-    for (var i=0; i < 4; i++ ) {
-    answerBtn = document.createElement('button');
-    answersContainer.appendChild(answerBtn);
-    answerBtn.textContent = quizQuestions[0].answers[i];
-    answerBtn.addEventListener('click', function() {
-        if (this.textContent === correctAnswer1)
-        {correct ();}
-        else {
-            incorrect();
-            minusTime()
+    for (var i = 0; i < 4; i++) {
+        answerBtn = document.createElement('button');
+        answersContainer.appendChild(answerBtn);
+        answerBtn.textContent = quizQuestions[0].answers[i];
+        answerBtn.addEventListener('click', function () {
+            if (this.textContent === correct1) { correct(); }
+            else {
+                incorrect();
+                
+            }
+            questions();
+            answers();
         }
-        
+
+        )
+
     }
-        
-    )
+}
 
-    }}
 
-// }
+function questions() {
+    questionTitle.textContent = quizQuestions[questionsCounter].question;
+    questionsContainer.append(questionTitle);
+    questionsCounter++
+}
+
+function answers() {
+    answersContainer.innerHTML = '';  // clears answer container on next answers
+    questionsContainer.append(answersContainer);  // adds another set of questions
+    // creates new set of answers button in a loop
+    for (var i = 0; i < 4; i++) {
+        answerBtn = document.createElement("button");
+        answersContainer.appendChild(answerBtn);
+        answerBtn.textContent = quizQuestions[questionsCounter - 1].answers[i];
+        answerBtn.addEventListener("click", function () {
+            if (this.textContent === correct2 
+                || this.textContent === correct3
+                || this.textContent === correct3 
+                || this.textContent === correct4 
+                || this.textContent === correct5) {
+                correct();
+            }
+            
+            else {
+                incorrect();
+                
+            }
+            if (questionsCounter == 5) {
+                gameOver();
+            }
+            else {
+                questions();
+                answers();
+            }
+
+
+        })
+    }
+}
+
+
+function correct() {
+    feedback.classList.remove('hide');
+    feedback.classList.add('wrapper');
+    feedback.textContent = "Correct!";
+    document.body.appendChild(feedback);
+    var right = new Audio('./assets/sfx/correct.wav');
+    right.play();
+    setTimeout(function () {
+        feedback.classList.add('hide');
+    }, 1200);
+};
+
+function incorrect() {
+    feedback.classList.remove('hide');
+    feedback.classList.add('wrapper')
+    feedback.textContent = "Wrong, try again";
+    document.body.appendChild(feedback);
+    var wrong = new Audio('./assets/sfx/incorrect.wav');
+    wrong.play();
+    setTimeout(function () {
+        feedback.classList.add('hide');
+    }, 1200);
+};
+
+
+
 // After start button pressed timer is on and game is starter - furst questions and answers appearing
-startButton.addEventListener ("click", function(event) {
+startButton.addEventListener("click", function (event) {
     event.preventDefault();
     alert("clicked")
     startTimer();
     gameInit();
 
-}
-)
+})
