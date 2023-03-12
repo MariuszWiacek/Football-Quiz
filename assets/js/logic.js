@@ -5,7 +5,6 @@ var endScreen = document.getElementById("end-screen")
 var questionTitle = document.getElementById("question-title");
 var questionsContainer = document.getElementById("questions");
 var answersContainer = document.getElementById("choices");
-var intro = document.getElementById("intro");
 var statsContainer = document.getElementById("stats");
 var feedbackContainer = document.getElementById("feedback");
 
@@ -18,8 +17,9 @@ var answerBtn;
 var questionIndex = 0;
 var secondsLeft = 100;
 
-let finalScore = document.getElementById("final-score");
+var finalScore = document.getElementById("final-score");
 var submitBtn = document.getElementById('submit');
+var initials = document.getElementById("initials");
 
 
 function startTimer() {
@@ -40,15 +40,19 @@ function gameInit() {
 
 }
 
+
 function gameOver () {
         clearInterval(timerInterval)
-        let result = totalPoints;
+        var result = totalPoints;
         answersContainer.innerHTML = "";
         questionsContainer.innerHTML = "";
         endScreen.classList.remove("hide");
         finalScore.textContent = result;
+
+        //submit button to add scores to local storage
         submitBtn.addEventListener("click", function () {
-            let myScore = initials.value + " - " + result
+           
+            var myScore = initials.value + " - " + result
             highscoreArray = JSON.parse(localStorage.getItem("highscoreArray")) || []
             highscoreArray.push(myScore)
             localStorage.setItem("highscoreArray", JSON.stringify(highscoreArray));
