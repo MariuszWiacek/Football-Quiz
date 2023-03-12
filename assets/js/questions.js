@@ -1,8 +1,8 @@
 // Objects with question 
 let quizQuestions = [
-    
+
     {
-        question: "1. What is first football clun of Christiano Ronaldo?",
+        question: "1. What is first football club of Christiano Ronaldo?",
         answers: [
             "1. Real Madrid",
             "2. Manchester United",
