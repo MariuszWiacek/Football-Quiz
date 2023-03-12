@@ -3,11 +3,10 @@
 ## Description
 
 This Football Quiz app is to check your knowledge about football. 
-You have 60sec to answer simple 5 questions
-
-In this App you are able to check weather for multiple cities and retrieve them later from local storage.
+You have 60sec to answer simple 5 questions, enjoy!
 
 ## Built With
+
 * HTML
 * CSS
 * Javascript
