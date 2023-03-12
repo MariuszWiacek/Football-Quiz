@@ -8,13 +8,19 @@ var answersContainer = document.getElementById("choices");
 var intro = document.getElementById("intro");
 var statsContainer = document.getElementById("stats");
 var feedbackContainer = document.getElementById("feedback");
+
+
 var totalPoints = 0;
 var pointsPerQuestion = 1;
 var questionsCounter = 0;
 
 var answerBtn;
 var questionIndex = 0;
-var secondsLeft = 30;
+var secondsLeft = 100;
+
+let finalScore = document.getElementById("final-score");
+var submitBtn = document.getElementById('submit');
+
 
 function startTimer() {
     timerInterval = setInterval(function () {
@@ -36,11 +42,18 @@ function gameInit() {
 
 function gameOver () {
         clearInterval(timerInterval)
-        let result = secondsLeft;
+        let result = totalPoints;
         answersContainer.innerHTML = "";
         questionsContainer.innerHTML = "";
         endScreen.classList.remove("hide");
-        finalScoreSpan.textContent = result;
+        finalScore.textContent = result;
+        submitBtn.addEventListener("click", function () {
+            let myScore = initials.value + " - " + result
+            highscoreArray = JSON.parse(localStorage.getItem("highscoreArray")) || []
+            highscoreArray.push(myScore)
+            localStorage.setItem("highscoreArray", JSON.stringify(highscoreArray));
+            window.location.href = "highscores.html"
+        })
        
     };
 
@@ -121,6 +134,8 @@ function answers() {
 
 
 function correct() {
+    totalPoints++;
+    console.log(totalPoints)
     feedback.classList.remove('hide');
     feedback.classList.add('wrapper');
     feedback.textContent = "Correct!";
@@ -149,7 +164,6 @@ function incorrect() {
 // After start button pressed timer is on and game is starter - furst questions and answers appearing
 startButton.addEventListener("click", function (event) {
     event.preventDefault();
-    alert("clicked")
     startTimer();
     gameInit();
 
