@@ -15,7 +15,7 @@ var questionsCounter = 0;
 
 var answerBtn;
 var questionIndex = 0;
-var secondsLeft = 100;
+var secondsLeft = 60;
 
 var finalScore = document.getElementById("final-score");
 var submitBtn = document.getElementById('submit');
@@ -41,32 +41,32 @@ function gameInit() {
 }
 
 
-function gameOver () {
-        clearInterval(timerInterval)
-        var result = totalPoints;
-        answersContainer.innerHTML = "";
-        questionsContainer.innerHTML = "";
-        endScreen.classList.remove("hide");
-        finalScore.textContent = result;
+function gameOver() {
+    clearInterval(timerInterval)
+    var result = totalPoints;
+    answersContainer.innerHTML = "";
+    questionsContainer.innerHTML = "";
+    endScreen.classList.remove("hide");
+    finalScore.textContent = result;
 
-        //submit button to add scores to local storage
-        submitBtn.addEventListener("click", function () {
-           
-            var myScore = initials.value + " - " + result
-            highscoreArray = JSON.parse(localStorage.getItem("highscoreArray")) || []
-            highscoreArray.push(myScore)
-            localStorage.setItem("highscoreArray", JSON.stringify(highscoreArray));
-            window.location.href = "highscores.html"
-        })
-       
-    };
+    //submit button to add scores to local storage
+    submitBtn.addEventListener("click", function () {
+        var myScore = initials.value + " - " + result
+        highscoreArray = JSON.parse(localStorage.getItem("highscoreArray")) || []
+        highscoreArray.push(myScore)
+        localStorage.setItem("highscoreArray", JSON.stringify(highscoreArray));
+        window.location.href = "highscores.html"
+    })
+
+
+};
 
 
 function displayQuestions() {
     startScreen.style.display = "none"; // unhide start screen
     document.body.appendChild(questionsContainer);
     questionsContainer.classList.remove('hide');
-    questionsContainer.style = "display: flex; flex-direction: column; justify-content = flex-start";
+    questionsContainer.style = "display: flex; flex-direction: column; text-align: center;";
     questionTitle.textContent = quizQuestions[0].question;
     questionsContainer.append(questionTitle);
     questionsCounter++;
@@ -79,12 +79,13 @@ function displayAnswers() {
     for (var i = 0; i < 4; i++) {
         answerBtn = document.createElement('button');
         answersContainer.appendChild(answerBtn);
+        answersContainer.style = "display: flex; flex-direction: column; align-items: center;";
         answerBtn.textContent = quizQuestions[0].answers[i];
         answerBtn.addEventListener('click', function () {
             if (this.textContent === correct1) { correct(); }
             else {
                 incorrect();
-                
+
             }
             questions();
             answers();
@@ -111,18 +112,18 @@ function answers() {
         answersContainer.appendChild(answerBtn);
         answerBtn.textContent = quizQuestions[questionsCounter - 1].answers[i];
         answerBtn.addEventListener("click", function () {
-            if (this.textContent === correct2 
+            if (this.textContent === correct2
                 || this.textContent === correct3
-                || this.textContent === correct3 
-                || this.textContent === correct4 
+                || this.textContent === correct3
+                || this.textContent === correct4
                 || this.textContent === correct5) {
                 correct();
             }
-            
+
             else {
                 incorrect();
                 minusTime();
-                
+
             }
             if (questionsCounter == 5) {
                 gameOver();

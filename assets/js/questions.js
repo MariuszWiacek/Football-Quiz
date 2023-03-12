@@ -34,10 +34,10 @@ let quizQuestions = [
     {
         question: "4. How many goals Robert Lewandowski scored in a champions league game in 2013 - Borussia Dortmund - Real Madrid (4-1)?",
         answers: [
-            "1. 1",
-            "2. 2",
-            "3. 3",
-            "4. 4"
+            "1. 1 goal",
+            "2. 2 goals",
+            "3. 3 goals",
+            "4. 4 goals"
         ],
     },
 
@@ -57,5 +57,5 @@ let quizQuestions = [
 let correct1 = "3. Sporting Lisbon"
 let correct2 = "2. 2012"
 let correct3 = "4. Crvena Zvezda Belgrade"
-let correct4 = "4. 4"
+let correct4 = "4. 4 goals"
 let correct5 = "4. In 2.4 sec of a game"
