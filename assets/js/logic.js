@@ -34,6 +34,17 @@ function gameInit() {
 
 }
 
+function gameOver () {
+        clearInterval(timerInterval)
+        let result = secondsLeft;
+        answersContainer.innerHTML = "";
+        questionsContainer.innerHTML = "";
+        endScreen.classList.remove("hide");
+        finalScoreSpan.textContent = result;
+       
+    };
+
+
 function displayQuestions() {
     startScreen.style.display = "none"; // unhide start screen
     document.body.appendChild(questionsContainer);

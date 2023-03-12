@@ -54,7 +54,7 @@ let quizQuestions = [
 
 //Variables with correct answers
 
-let correct1 = "3. 2007"
+let correct1 = "3. Sporting Lisbon"
 let correct2 = "2. 2012"
 let correct3 = "4. Crvena Zvezda Belgrade"
 let correct4 = "4. 4"
